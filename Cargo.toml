@@ -1,0 +1,19 @@
+[package]
+name = "json_test"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde_json = { version = "1.0" , features = ["std", "float_roundtrip"], default-features = false}
+serde = { version = "1.0.217", default-features = false}
+
+[profile.release]
+codegen-units = 1
+debug = false
+incremental = false
+lto = "thin"
+opt-level = 3
+panic = "abort"
+
+[profile.release.build-override]
+opt-level = 0
