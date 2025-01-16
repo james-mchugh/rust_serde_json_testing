@@ -20,6 +20,13 @@ use std::time::{Duration, Instant};
 //     timestamp: Option<String>,
 // }
 
+#[cfg(not(target_env = "msvc"))]
+use jemallocator::Jemalloc;
+
+#[cfg(not(target_env = "msvc"))]
+#[global_allocator]
+static GLOBAL: Jemalloc = Jemalloc;
+
 fn main() {
     let contents = String::from_str("{\"foo\": \"bar\"}").unwrap();
     const MAX_ITER: usize = 10_000_000;
